@@ -1,5 +1,5 @@
 #my ignored files
-cfg.*.php
+cfg.*
 cache/
 logs/
 log/

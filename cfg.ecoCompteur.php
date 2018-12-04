@@ -3,8 +3,8 @@
 	$pageData="data.json";
 	$pageLog1="log1.csv";
 	$pageLog2="log2.csv";
-	
-	$urlEcoCompteur = "http://mondomaine.com:unport";
+
+	$urlEcoCompteur = "http://maurizio.tikia.net:2180";
 	$urlEcoCompteur_inst = $urlEcoCompteur."/".$pageInst;
 	$urlEcoCompteur_data = $urlEcoCompteur."/".$pageData;
 	$urlEcoCompteur_log1 = $urlEcoCompteur."/".$pageLog1;

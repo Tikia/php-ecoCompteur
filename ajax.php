@@ -41,17 +41,25 @@
 		curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
 		curl_setopt($ch, CURLOPT_FAILONERROR, 1);
-		
 		$result=curl_exec($ch);
 		$info=curl_getinfo($ch);
 		//echo "**********************cURL-INFO-BEGIN*********************\n";
 		//aff($info);
 		//echo "***********************cURL-INFO-END**********************\n";
 		curl_close($ch);
-		
 		return $result;
 	}
-	
+	function getData($url,$cacheID,$delai) {
+		global $cache;
+		if($cache->is_old($cacheID,$delai)) {
+			$csv=readRemoteFile($url);
+			$cache->set($cacheID,$csv);
+		}
+		else {
+			$csv=$cache->get($cacheID);
+		}
+		return $csv;
+	}
 	if(isset($_GET['part'])) {
 		switch($_GET['part']) {
 			case "inst.json":
@@ -59,27 +67,15 @@
 				echo $json;
 				break;
 			case "data.json":
-				$json=readRemoteFile($urlEcoCompteur_data);
+				$json=getData($urlEcoCompteur_data,"data",60*60*24);
 				echo $json;
 				break;
 			case "log1.csv":
-				if($cache->is_old("log1",24*60*60)) {
-					$csv=readRemoteFile($urlEcoCompteur_log1);
-					$cache->set("log1",$csv);
-				}
-				else {
-					$csv=$cache->get('log1');
-				}
+				$csv=getData($urlEcoCompteur_log1,"log1",60*60*24);
 				echo csv2json4log($csv);
 				break;
 			case "log2.csv":
-				if($cache->is_old("log2",60*60)) {
-					$csv=readRemoteFile($urlEcoCompteur_log2);
-					$cache->set("log2",$csv);
-				}
-				else {
-					$csv=$cache->get('log2');
-				}
+				$csv=getData($urlEcoCompteur_log2,"log2",60*60);
 				echo csv2json4log($csv);
 				break;
 			default:

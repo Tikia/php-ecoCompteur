@@ -5,6 +5,7 @@ function getTooltip(label,date,conso_wh,conso_euro,total_kWh,total_euro) {
 		"&nbsp;&nbsp;"+getValue_kWh(conso_wh)+" kWh / "+total_kWh+" kWh<br />"+
 		"&nbsp;&nbsp;"+getValue_euro(conso_euro)+" € / "+total_euro+" €"+
 		"</div>";
+		
 	return txt;
 }
 function getValue_kWh(value) {
@@ -12,6 +13,7 @@ function getValue_kWh(value) {
 }
 function getValue_euro(value) {
 	var montant=value;
+	
 	return montant.toFixed(3);
 }
 function createYearChart(json) {
@@ -203,10 +205,12 @@ function createChartGauge(id) {
 function getLabel(id) {
 	if(id=="label_entree6") return "Autre";
 	if(id=="label_entreeAll") return "Total";
+	
 	return dataJSON[id];
 }
 function getInstValue(id) {
 	if(id=="dataAll") return instTotal;
+	
 	return instJSON[id];
 }
 function inst_refresh() {

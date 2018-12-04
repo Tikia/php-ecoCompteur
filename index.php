@@ -18,7 +18,6 @@
 	var page_data=page+"<?php echo $pageData; ?>";
 	var page_log1=page+"<?php echo $pageLog1; ?>";
 	var page_log2=page+"<?php echo $pageLog2; ?>";
-
 	google.charts.load('current', {'packages':['corechart','gauge']});
 </script>
 </head>

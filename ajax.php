@@ -30,6 +30,7 @@
 			}
 		}
 		//aff($tab);
+		
 		return json_encode($tab);
 	}
 	function readRemoteFile($url) {
@@ -47,10 +48,12 @@
 		//aff($info);
 		//echo "***********************cURL-INFO-END**********************\n";
 		curl_close($ch);
+		
 		return $result;
 	}
 	function getData($url,$cacheID,$delai) {
 		global $cache;
+		
 		if($cache->is_old($cacheID,$delai)) {
 			$csv=readRemoteFile($url);
 			$cache->set($cacheID,$csv);
@@ -58,6 +61,7 @@
 		else {
 			$csv=$cache->get($cacheID);
 		}
+		
 		return $csv;
 	}
 	if(isset($_GET['part'])) {

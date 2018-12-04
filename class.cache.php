@@ -18,7 +18,7 @@ class cache {
 				return $this->unserializeur($cacheData);
 			}
 		}
-
+		
 		return NULL;
     }
     public function set($id,$data) {
@@ -39,7 +39,7 @@ class cache {
 		else {
 			return true;
 		}
-
+		
 		return false;
     }
     public function is_cached($id) {
@@ -50,7 +50,7 @@ class cache {
 				return true;
 			}
 		}
-
+		
 		return false;
     }
 	public function un_set($id) {
@@ -66,7 +66,7 @@ class cache {
 		$search=array("\n","\t");
 		$replace=array('','');
 		$str=str_replace($search,$replace,$str);
-
+		
 		return addslashes(serialize($str));
 	}
 	private function write($path,$value) {
@@ -82,7 +82,7 @@ class cache {
 	}
 	private function create_path($id) {
 		$out=$this->root_Path.'/'.$id.'.cache';
-
+		
 		return $out;
 	}
 }

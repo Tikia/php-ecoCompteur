@@ -71,12 +71,10 @@
 	text-shadow: none !important;
 }
 /* Smaller buttons styles */
-
 .button.small {
 	padding: 4px 12px;
 }
 /* Larger buttons styles */
-
 .button.large {
 	padding: 12px 30px;
 	text-transform: uppercase;
@@ -85,7 +83,6 @@
 	top: 2px;
 }
 /* Colored buttons styles */
-
 .button.green, .button.red, .button.blue {
 	color: #fff;
 	text-shadow: 0 1px 0 rgba(0,0,0,.2);
@@ -97,7 +94,6 @@
 	background-image: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
 }
 /* */
-
 .button.green {
 	background-color: #57a957;
 	border-color: #57a957;
@@ -109,7 +105,6 @@
 	background: #57a957;
 }
 /* */
-
 .button.red {
 	background-color: #ca3535;
 	border-color: #c43c35;
@@ -121,7 +116,6 @@
 	background: #c43c35;
 }
 /* */
-
 .button.blue {
 	background-color: #269CE9;
 	border-color: #269CE9;
@@ -133,7 +127,6 @@
 	background: #269CE9;
 }
 /* */
-
 .green[disabled], .green[disabled]:hover, .green[disabled]:active {
 	border-color: #57A957;
 	background: #57A957;
@@ -150,7 +143,6 @@
 	color: #93D5FF;
 }
 /* Group buttons */
-
 .button-group, .button-group li {
 	display: inline-block;
  *display: inline;

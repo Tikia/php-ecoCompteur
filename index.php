@@ -6,7 +6,13 @@
 <head>
 <meta charset="utf-8">
 <title>Mon éco-compteur</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 <link rel="stylesheet" href="./buttons.css">
+<style type="text/css">
+body{
+	font-family: Roboto, Arial, sans-serif
+}
+</style>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="./fct.ecoCompteur.js"></script>
@@ -17,46 +23,65 @@
 	var page_inst=page+"<?php echo $pageInst; ?>";
 	var page_data=page+"<?php echo $pageData; ?>";
 	var page_log1=page+"<?php echo $pageLog1; ?>";
+	var page_log1_jour=page_log1;
+	var page_log1_semaine=page_log1+"&aggregate=semaine";
+	var page_log1_mois=page_log1+"&aggregate=mois";
 	var page_log2=page+"<?php echo $pageLog2; ?>";
-	google.charts.load('current', {'packages':['corechart','gauge']});
+	google.charts.load('current', {'packages':['corechart','gauge','bar']});
 </script>
 </head>
 <body>
 <ul class="button-group">
     <button class="blue button" id="bttn_inst" onClick="onStart('inst');" disabled>Consommation instantanées</button>
-    <button class="green button" id="bttn_jour" onClick="onStart('jour');" disabled>Consommation journalière</button>
-    <button class="green button" id="bttn_an" onClick="onStart('an');" disabled>Consommation annuelle</button>
+    <button class="green button" id="bttn_heure" onClick="onStart('heure');" disabled>Consommation par heure</button>
+    <button class="green button" id="bttn_jour" onClick="onStart('jour');" disabled>Consommation par jour</button>
+    <button class="green button" id="bttn_semaine" onClick="onStart('semaine');" disabled>Consommation par semaine</button>
+    <button class="green button" id="bttn_mois" onClick="onStart('mois');" disabled>Consommation par mois</button>
     <button class="red button" id="bttn_stop" onClick="onStop();" disabled>Stop</button>
 </ul>
 <div id="inst" style="display:none;">
     <h1>Consommations instantanées</h1>
-    <div style="width: 1440px; height: 240px;">
-        <div id="chart_stackedBar_div" style="width: 1440px; height: 240px;"></div>
+    <div style="width: 1800px; height: 300px;">
+        <div id="inst_stackedBar_div" style="width: 1800px; height: 300px;"></div>
     </div>
-    <div style="width: 320px; height: 320px; padding-left: 560px;">
-        <div id="chart_gauge_dataAll_div" style="width: 320px; height: 320px; float: left;"></div>
+    <div style="width: 500px; height: 500px; padding-left: 650px;">
+        <div id="inst_gauge_dataAll_div" style="width: 500px; height: 500px; float: left;"></div>
     </div>
-    <div style="width: 1440px; height: 240px;">
-        <div id="chart_gauge_data1_div" style="width: 240px; height: 240px; float: left;"></div>
-        <div id="chart_gauge_data2_div" style="width: 240px; height: 240px; float: left;"></div>
-        <div id="chart_gauge_data3_div" style="width: 240px; height: 240px; float: left;"></div>
-        <div id="chart_gauge_data4_div" style="width: 240px; height: 240px; float: left;"></div>
-        <div id="chart_gauge_data5_div" style="width: 240px; height: 240px; float: left;"></div>
-        <div id="chart_gauge_data6_div" style="width: 240px; height: 240px; float: left;"></div>	
+    <div style="width: 1800px; height: 300px;">
+        <div id="inst_gauge_data1_div" style="width: 300px; height: 300px; float: left;"></div>
+        <div id="inst_gauge_data2_div" style="width: 300px; height: 300px; float: left;"></div>
+        <div id="inst_gauge_data3_div" style="width: 300px; height: 300px; float: left;"></div>
+        <div id="inst_gauge_data4_div" style="width: 300px; height: 300px; float: left;"></div>
+        <div id="inst_gauge_data5_div" style="width: 300px; height: 300px; float: left;"></div>
+        <div id="inst_gauge_data6_div" style="width: 300px; height: 300px; float: left;"></div>	
+    </div>
+</div>
+<div id="heure" style="display:none;">
+    <h1>Consommation par heure</h1>
+    <div style="width: 1800px; height: 600px;">
+        <div id="heure_chart_line_div" style="width: 1800px; height: 600px;"></div>
+        <div id="heure_stackedBar_div" style="width: 1800px; height: 600px;"></div>
     </div>
 </div>
 <div id="jour" style="display:none;">
-    <h1>Consommation journalière</h1>
-    <div style="width: 1440px; height: 600px;">
-        <div id="day_chart_line_div" style="width: 1440px; height: 600px;"></div>
-        <div id="day_stackedBar_div" style="width: 1440px; height: 600px;"></div>
+    <h1>Consommation par jour</h1>
+    <div style="width: 1800px; height: 1200px;">
+        <div id="jour_chart_line_div" style="width: 1800px; height: 600px;"></div>
+        <div id="jour_stackedBar_div" style="width: 1800px; height: 600px;"></div>
     </div>
 </div>
-<div id="an" style="display:none;">
-    <h1>Consommation annuelle</h1>
-    <div style="width: 1440px; height: 1200px;">
-        <div id="year_chart_line_div" style="width: 1440px; height: 600px;"></div>
-        <div id="year_stackedBar_div" style="width: 1440px; height: 600px;"></div>
+<div id="semaine" style="display:none;">
+    <h1>Consommation par semaine</h1>
+    <div style="width: 1800px; height: 1200px;">
+        <div id="semaine_chart_line_div" style="width: 1800px; height: 600px;"></div>
+        <div id="semaine_stackedBar_div" style="width: 1800px; height: 600px;"></div>
+    </div>
+</div>
+<div id="mois" style="display:none;">
+    <h1>Consommation par mois</h1>
+    <div style="width: 1800px; height: 1200px;">
+        <div id="mois_chart_line_div" style="width: 1800px; height: 600px;"></div>
+        <div id="mois_stackedBar_div" style="width: 1800px; height: 600px;"></div>
     </div>
 </div>
 </body>

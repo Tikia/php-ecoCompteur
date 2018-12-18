@@ -3,7 +3,7 @@ function createYearChart_mois(json) {
 	var tab = [];
 	tab.push(getHeader());
 	$.each(json,function(i,elem) {
-		monthNumber=elem[4];
+		monthNumber=elem[4]-1;
 		tab.push(getLine(elem,getMonthName(monthNumber),"Mois de "+getMonthName(monthNumber)));
 	});
 	createCharts(tab,"mois");
